@@ -1,4 +1,3 @@
-/* vim: set filetype=json5: */
 {
 	"compilerOptions": {
 		"target": "ES6",

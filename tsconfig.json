@@ -1,11 +1,38 @@
+// https://www.typescriptlang.org/tsconfig/
 {
 	"compilerOptions": {
-		"target": "ES6",
-		"module": "commonjs",
-		"lib": ["es2020", "dom"],
-		"moduleResolution": "node",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
+		//* Type Checking
+		"exactOptionalPropertyTypes": false,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strict": true,
+		//* Modules
+		"module": "Preserve", // NodeNext | Preserve
+		"paths": {},
+		"resolveJsonModule": true,
+		"rewriteRelativeImportExtensions": true, // Node.js
+		"rootDir": "src",
+		"types": ["node"],
+		//* Emit
+		"noEmit": false,
+		"outDir": "dist",
+		"removeComments": true,
+		//* JavaScript Support
+		"checkJs": true,
+		//* Interop Constraints
+		"erasableSyntaxOnly": true, // Node.js
+		"preserveSymlinks": true,
+		"verbatimModuleSyntax": true, // Node.js
+		//* Language and Environment
+		"target": "ESNext", // ESNext
+		//* Completeness
 		"skipLibCheck": true
-	}
+	},
+	"include": ["*", "src/**/*"],
+	"exclude": ["node_modules"]
 }

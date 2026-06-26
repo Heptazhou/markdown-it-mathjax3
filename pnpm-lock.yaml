@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  encoding-sniffer: '*'
+  encoding-sniffer: ^1
 
 packageExtensionsChecksum: sha256-Vpo7fk97f9nYXJpAkZPv6wSefZ1wq4FkjT3vu53N7ro=
 
@@ -20,22 +20,21 @@ importers:
         specifier: ^12.1.1
         version: 12.1.1
     devDependencies:
-      markdown-it:
-        specifier: ^14.2.0
-        version: 14.2.0
-      prettier:
-        specifier: ^3.8.4
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-    optionalDependencies:
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
       '@types/node':
         specifier: ^26.0.1
         version: 26.0.1
+      markdown-it:
+        specifier: ^14.2.0
+        version: 14.2.0
+      prettier:
+        specifier: ^3.8.5
+        version: 3.8.5
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
 packages:
 
@@ -257,8 +256,8 @@ packages:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
-  prettier@3.8.4:
-    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
+  prettier@3.8.5:
+    resolution: {integrity: sha512-zxcTTCedNGJM4R8sj/Cq/F0W/c4iE0afWBcBwMTRtw4WHYP9TWkYjdiH3npPRUYsXQCPR0hTU9yjovOu+E6EQA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -335,22 +334,18 @@ snapshots:
       mj-context-menu: 1.0.0
       speech-rule-engine: 5.0.0-rc.1
 
-  '@types/linkify-it@5.0.0':
-    optional: true
+  '@types/linkify-it@5.0.0': {}
 
   '@types/markdown-it@14.1.2':
     dependencies:
       '@types/linkify-it': 5.0.0
       '@types/mdurl': 2.0.0
-    optional: true
 
-  '@types/mdurl@2.0.0':
-    optional: true
+  '@types/mdurl@2.0.0': {}
 
   '@types/node@26.0.1':
     dependencies:
       undici-types: 8.3.0
-    optional: true
 
   '@xmldom/xmldom@0.9.10': {}
 
@@ -553,7 +548,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier@3.8.4: {}
+  prettier@3.8.5: {}
 
   punycode.js@2.3.1: {}
 
@@ -574,8 +569,7 @@ snapshots:
 
   uc.micro@2.1.0: {}
 
-  undici-types@8.3.0:
-    optional: true
+  undici-types@8.3.0: {}
 
   undici@7.28.0: {}
 

@@ -1,31 +1,36 @@
 {
 	"name": "markdown-it-mathjax3",
 	"type": "module",
-	"version": "4.4.0",
+	"version": "4.4.1",
 	"license": "AGPL-3.0-only",
 	"main": "dist/main.js",
 	"scripts": {
+		"rst": "pnpm up -f",
 		"upd": "pnpm up --latest",
-		"make": "pnpm up && pnpm test && pnpm build",
+		"make": "pnpm test && pnpm build",
 		"test": "tsc --noemit",
-		"build": "tsc -d && prettier --ignore-path -w dist/"
+		"build": "tsc -d",
+		"premake": "pnpm up -s",
+		"postbuild": "prettier --no-semi -w dist/"
 	},
 	"dependencies": {
 		"@mathjax/src": "^4.1.2",
 		"juice": "^12.1.1"
 	},
 	"devDependencies": {
+		"@types/markdown-it": "^14.1.2",
+		"@types/node": "^26.0.1",
 		"markdown-it": "^14.2.0",
-		"prettier": "^3.8.4",
+		"prettier": "^3.8.5",
 		"typescript": "^6.0.3"
 	},
-	"optionalDependencies": {
-		"@types/markdown-it": "^14.1.2",
-		"@types/node": "^26.0.1"
+	"engines": {
+		"node": ">=24.0.0",
+		"pnpm": ">=10.0.0 <11"
 	},
 	"pnpm": {
 		"overrides": {
-			"encoding-sniffer": "*"
+			"encoding-sniffer": "^1"
 		},
 		"packageExtensions": {
 			"@mathjax/mathjax-newcm-font": {

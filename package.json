@@ -1,16 +1,16 @@
 {
 	"name": "markdown-it-mathjax3",
 	"type": "module",
-	"version": "4.4.1",
+	"version": "4.4.2",
 	"license": "AGPL-3.0-only",
 	"main": "dist/main.js",
 	"scripts": {
-		"rst": "pnpm up -f",
+		"rst": "pnpm up -f && pnpm postupd",
 		"upd": "pnpm up --latest",
-		"make": "pnpm test && pnpm build",
+		"make": "pnpm up -s && pnpm test && pnpm build",
 		"test": "tsc --noemit",
 		"build": "tsc -d",
-		"premake": "pnpm up -s",
+		"postupd": "replace-in-file \"<!doctype\" \"<!DOCTYPE\" node_modules/prettier/*/*",
 		"postbuild": "prettier --no-semi -w dist/"
 	},
 	"dependencies": {
@@ -21,12 +21,13 @@
 		"@types/markdown-it": "^14.1.2",
 		"@types/node": "^26.0.1",
 		"markdown-it": "^14.2.0",
-		"prettier": "^3.8.5",
+		"prettier": "^3.9.1",
+		"replace-in-file": "^8.4.0",
 		"typescript": "^6.0.3"
 	},
 	"engines": {
 		"node": ">=24.0.0",
-		"pnpm": ">=10.0.0 <11"
+		"pnpm": ">=10.0.0"
 	},
 	"pnpm": {
 		"overrides": {

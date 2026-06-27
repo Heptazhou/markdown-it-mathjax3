@@ -39,8 +39,7 @@ function renderMath(content: string, documentOptions: DocumentOptions, convertOp
 	return ret
 }
 
-// Test if potential opening or closing delimieter
-// Assumes that there is a "$" at state.src[pos]
+// test if potential opening or closing delimieter assumes that there is a "$" at state.src[pos]
 function isValidDelim(state: StateInline, pos: number) {
 	let max = state.posMax,
 		can_open = true,
@@ -49,7 +48,7 @@ function isValidDelim(state: StateInline, pos: number) {
 	const prevChar = pos > 0 ? state.src.charCodeAt(pos - 1) : -1,
 		nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1
 
-	// Check non-whitespace conditions for opening and closing,
+	// check non-whitespace conditions for opening and closing,
 	// and check that closing delimeter isn't followed by a number
 	if (prevChar === 0x20 /* " " */ || prevChar === 0x09 /* \t */ || (nextChar >= 0x30 /* "0" */ && nextChar <= 0x39) /* "9" */) {
 		can_close = false
@@ -58,69 +57,52 @@ function isValidDelim(state: StateInline, pos: number) {
 		can_open = false
 	}
 
-	return {
-		can_open: can_open,
-		can_close: can_close,
-	}
+	return { can_open, can_close }
 }
 
 function math_inline(state: StateInline, silent: boolean) {
-	if (state.src[state.pos] !== "$") {
-		return false
-	}
+	if (state.src[state.pos] !== "$") return false
 
 	let res = isValidDelim(state, state.pos)
 	if (!res.can_open) {
-		if (!silent) {
-			state.pending += "$"
-		}
-		state.pos += 1
+		if (!silent) state.pending += "$"
+		state.pos++
 		return true
 	}
 
-	// First check for and bypass all properly escaped delimieters
-	// This loop will assume that the first leading backtick can not be the first character in state.src,
-	// which is known since we have found an opening delimieter already.
+	// first check for and bypass all properly escaped delimieters,
+	// this loop will assume that the first leading backtick can not be the first character in state.src,
+	// which is known since we have found an opening delimieter already
 	const start = state.pos + 1
 	let match = start
 	while ((match = state.src.indexOf("$", match)) !== -1) {
-		// Found potential $, look for escapes, pos will point to first non escape when complete
+		// found potential $, look for escapes, pos will point to first non escape when complete
 		let pos = match - 1
-		while (state.src[pos] === "\\") {
-			pos -= 1
-		}
+		while (state.src[pos] === "\\") pos--
 
-		// Even number of escapes, potential closing delimiter found
-		if ((match - pos) % 2 == 1) {
-			break
-		}
-		match += 1
+		// even number of escapes, potential closing delimiter found
+		if ((match - pos) % 2 == 1) break
+		match++
 	}
 
-	// No closing delimter found.  Consume $ and continue.
+	// no closing delimter found, consume $ and continue
 	if (match === -1) {
-		if (!silent) {
-			state.pending += "$"
-		}
+		if (!silent) state.pending += "$"
 		state.pos = start
 		return true
 	}
 
-	// Check if we have empty content, ie: $$.  Do not parse.
+	// check if we have empty content, i.e., $$, do not parse
 	if (match - start === 0) {
-		if (!silent) {
-			state.pending += "$$"
-		}
+		if (!silent) state.pending += "$$"
 		state.pos = start + 1
 		return true
 	}
 
-	// Check for valid closing delimiter
+	// check for valid closing delimiter
 	res = isValidDelim(state, match)
 	if (!res.can_close) {
-		if (!silent) {
-			state.pending += "$"
-		}
+		if (!silent) state.pending += "$"
 		state.pos = start
 		return true
 	}
@@ -142,39 +124,29 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
 		max = state.eMarks[start]!,
 		lastLine = ""
 
-	if (pos + 2 > max) {
-		return false
-	}
-	if (state.src.slice(pos, pos + 2) !== "$$") {
-		return false
-	}
+	if (pos + 2 > max) return false
+	if (state.src.slice(pos, pos + 2) !== "$$") return false
 
 	pos += 2
 	let firstLine = state.src.slice(pos, max)
 
-	if (silent) {
-		return true
-	}
+	if (silent) return true
 	if (firstLine.trim().slice(-2) === "$$") {
-		// Single line expression
+		// single line expression
 		firstLine = firstLine.trim().slice(0, -2)
 		found = true
 	}
 
-	for (next = start; !found; ) {
+	for (next = start; !found;) {
 		next++
 
-		if (next >= end) {
-			break
-		}
+		if (next >= end) break
 
 		pos = state.bMarks[next]! + state.tShift[next]!
 		max = state.eMarks[next]!
 
-		if (pos < max && state.tShift[next]! < state.blkIndent) {
-			// non-empty line with negative indent should stop the list:
-			break
-		}
+		// non-empty line with negative indent should stop the list
+		if (pos < max && state.tShift[next]! < state.blkIndent) break
 
 		if (state.src.slice(pos, max).trim().slice(-2) === "$$") {
 			lastPos = state.src.slice(0, max).lastIndexOf("$$")
@@ -194,8 +166,7 @@ function math_block(state: StateBlock, start: number, end: number, silent: boole
 }
 
 function plugin(md: MarkdownIt, options: any) {
-	// Default options
-
+	// default options
 	const documentOptions = {
 		InputJax: new TeX({ packages: AllPackages, ...options?.tex }),
 		OutputJax: new SVG({ font: "mathjax-tex", ...options?.svg }),
@@ -204,7 +175,7 @@ function plugin(md: MarkdownIt, options: any) {
 		display: false,
 	}
 
-	// set MathJax as the renderer for markdown-it-simplemath
+	// set MathJax as the renderer
 	md.inline.ruler.after("escape", "math_inline", math_inline)
 	md.block.ruler.after("blockquote", "math_block", math_block, {
 		alt: ["paragraph", "reference", "blockquote", "list"],

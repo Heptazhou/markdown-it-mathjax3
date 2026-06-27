@@ -1,0 +1,30 @@
+// https://prettier.io/docs/options
+{
+	arrowParens: "always", // "always" | "avoid"
+	bracketSameLine: true, // false
+	bracketSpacing: true, // true
+	checkIgnorePragma: false, // false
+	embeddedLanguageFormatting: "auto", // "auto" | "off"
+	endOfLine: "lf", // "lf" | "auto"
+	experimentalOperatorPosition: "start", // "end" | "start"
+	experimentalTernaries: false, // false
+	htmlWhitespaceSensitivity: "ignore", // "css" | "ignore" | "strict"
+	insertPragma: false, // false
+	jsxSingleQuote: false, // false
+	objectWrap: "preserve", // "preserve" | "collapse"
+	overrides: [
+		{ files: "*.{json,jsonc,json5}", options: { printWidth: 1024 } },
+		{ files: "*.{yaml,yml}", options: { tabWidth: 2, useTabs: false } },
+	],
+	printWidth: 256, // 80
+	proseWrap: "preserve", // "preserve" | "never" | "always"
+	quoteProps: "consistent", // "as-needed" | "consistent" | "preserve"
+	requirePragma: false, // false
+	semi: false, // true
+	singleAttributePerLine: false, // false
+	singleQuote: false, // false
+	tabWidth: 4, // 2
+	trailingComma: "all", // "all" | "es5" | "none"
+	useTabs: true, // false
+	vueIndentScriptAndStyle: true, // false
+}

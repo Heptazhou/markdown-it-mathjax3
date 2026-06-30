@@ -20,6 +20,7 @@ function renderMath(content, documentOptions, convertOptions) {
 	const html = adaptor.outerHTML(mathDocument.convert(content, convertOptions))
 	const css = adaptor.outerHTML(documentOptions.OutputJax.styleSheet(mathDocument))
 	const ret = juice(css + html, { preserveFontFaces: false, preserveMediaQueries: false })
+	mathDocument.done()
 	return ret
 }
 function isValidDelim(state, pos) {

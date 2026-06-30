@@ -17,7 +17,7 @@
 		"resolveJsonModule": true,
 		"rewriteRelativeImportExtensions": true, // Node.js
 		"rootDir": "src",
-		"types": ["node"],
+		// "types": ["node"],
 		//* Emit
 		"noEmit": false,
 		"outDir": "dist",

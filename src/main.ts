@@ -36,6 +36,7 @@ function renderMath(content: string, documentOptions: DocumentOptions, convertOp
 	const html = adaptor.outerHTML(mathDocument.convert(content, convertOptions))
 	const css = adaptor.outerHTML(documentOptions.OutputJax.styleSheet(mathDocument) as any)
 	const ret = juice(css + html, { preserveFontFaces: false, preserveMediaQueries: false })
+	mathDocument.done()
 	return ret
 }
 

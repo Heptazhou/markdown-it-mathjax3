@@ -1,4 +1,4 @@
-import type MarkdownIt from "markdown-it"
+import type { MarkdownIt } from "markdown-it"
 import "@mathjax/src/js/util/asyncLoad/esm.js"
 import "@mathjax/src/js/input/tex/ams/AmsConfiguration.js"
 import "@mathjax/src/js/input/tex/base/BaseConfiguration.js"

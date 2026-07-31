@@ -5,14 +5,11 @@ import { RegisterHTMLHandler } from "@mathjax/src/js/handlers/html.js"
 import { SVG } from "@mathjax/src/js/output/svg.js"
 import { TeX } from "@mathjax/src/js/input/tex.js"
 import juice from "juice"
-import type MarkdownIt from "markdown-it"
-import type StateBlock from "markdown-it/lib/rules_block/state_block.mjs"
-import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs"
-import type Token from "markdown-it/lib/token.mjs"
+import type { MarkdownIt, StateBlock, StateInline, Token } from "markdown-it"
 
 import "@mathjax/src/js/util/asyncLoad/esm.js"
-
 const AllPackages = ["base", "ams", "mhchem", "newcommand", "noundefined"]
+
 import "@mathjax/src/js/input/tex/ams/AmsConfiguration.js"
 import "@mathjax/src/js/input/tex/base/BaseConfiguration.js"
 import "@mathjax/src/js/input/tex/mhchem/MhchemConfiguration.js"
